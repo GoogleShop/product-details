@@ -5,7 +5,8 @@ const path = require('path');
 
 app.use(express.static(path.join(__dirname, '/../dist')));
 
-app.get('/', (req, res) => {
+app.get('/product/:id', (req, res) => {
+  // console.log(req);
   res.send("Hello from Express");
 });
 
