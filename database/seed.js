@@ -1,21 +1,41 @@
+let faker = require('faker');
+let Product = require('./index.js');
+
+const getProductName = () => {
+  let productName = faker.commerce.product();
+  return productName;
+};
+
+const getProductDetails = () => {
+    let details = [];
+
+    while (details.length <= 3) {
+      let description = faker.commerce.productDescription();
+      details.push(description);
+    }
+    return details;
+};
+
+const getProductImages = () => {
+  let images = [];
+
+  while (images.length <= 5) {
+    let randomImage = productImages[Math.floor(Math.random() * productImages.length)];
+    images.push(randomImage);
+  }
+  return images;
+};
+
+const getProductStars = () => {
+  let starRating = (Math.random() * (5 - 1) + 1);
+  let splitStar = starRating.toString().split('.');
+  splitStar[1] = splitStar[1].slice(0, 2);
+  starRating = splitStar[0] + '.' + splitStar[1];
+  return starRating;
+};
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const productPhotos = [
+const productImages = [
   'https://individualitemsphotos.s3-us-west-2.amazonaws.com/IndividualItemsPhotos/IndividualItemsPhotos/photo-1.jpeg',
   'https://individualitemsphotos.s3-us-west-2.amazonaws.com/IndividualItemsPhotos/IndividualItemsPhotos/photo-10.jpeg',
   'https://individualitemsphotos.s3-us-west-2.amazonaws.com/IndividualItemsPhotos/IndividualItemsPhotos/photo-100.jpeg',
@@ -317,3 +337,25 @@ const productPhotos = [
   'https://individualitemsphotos.s3-us-west-2.amazonaws.com/IndividualItemsPhotos/IndividualItemsPhotos/photo-98.jpeg',
   'https://individualitemsphotos.s3-us-west-2.amazonaws.com/IndividualItemsPhotos/IndividualItemsPhotos/photo-99.jpeg',
 ];
+
+
+const seedDB = async () => {
+  try {
+    for (let i = 0; i < 100; i++) {
+      let product = new Product({
+        name: getProductName(),
+        details: getProductDetails(),
+        images: getProductImages(),
+        stars: getProductStars(),
+      });
+      product.save(function(err, product) {
+        if (err) return console.error(err);
+        console.log('Saved new product: ', product);
+      })
+    }
+  } catch (err) {
+    console.log('Error seeding database!');
+  }
+};
+
+seedDB();
