@@ -5,6 +5,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentProductId: 1,
       name: '',
       details: [],
       images: [],
@@ -13,14 +14,21 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:3000/product/1')
+    const urlParams = window.location.pathname.replace(/\//g, ' ');
+    const urlParamsArray = urlParams.toString().split(' ');
+    const productId = urlParamsArray[2];
+    this.setState({
+      currentProductId: productId
+    });
+
+    return axios.get(`http://localhost:3000/shop/product/${this.state.currentProductId}`)
     .then((res) => {
-      console.log('Response from GET: ', res.data);
+      console.log('Response from GET: ', res.data[0]);
     })
     .catch((err) => {
       console.log('Error from GET: ', err);
     })
-  }
+  };
 
 
 
