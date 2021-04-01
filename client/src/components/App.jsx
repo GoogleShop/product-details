@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductImages from './ProductImages';
 const axios = require('axios');
 
 class App extends React.Component {
@@ -11,6 +12,8 @@ class App extends React.Component {
       images: [],
       stars: 0,
     };
+
+    this.getProductData = this.getProductData.bind(this);
   };
 
   componentDidMount() {
@@ -21,9 +24,19 @@ class App extends React.Component {
       currentProductId: productId
     });
 
-    return axios.get(`http://localhost:3000/shop/product/${this.state.currentProductId}`)
+    this.getProductData(productId);
+  };
+
+  getProductData(productId) {
+    axios.get(`http://localhost:3000/shop/product/${productId}`)
     .then((res) => {
-      console.log('Response from GET: ', res.data[0]);
+      const productData = res.data[0];
+      this.setState({
+        name: productData.name,
+        details: productData.details,
+        images: productData.images,
+        stars: productData.stars,
+      })
     })
     .catch((err) => {
       console.log('Error from GET: ', err);
@@ -36,6 +49,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Hello React</h1>
+        <ProductImages images={this.state.images}/>
       </div>
     )
   };
