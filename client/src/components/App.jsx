@@ -11,7 +11,6 @@ class App extends React.Component {
     };
 
     this.getProductData = this.getProductData.bind(this);
-    this.toggleLoading = this.toggleLoading.bind(this);
   };
 
   componentDidMount() {
@@ -25,7 +24,6 @@ class App extends React.Component {
   getProductData(productId) {
     axios.get(`http://localhost:3000/shop/product/${productId}`)
     .then((productData) => {
-      console.log('www', productData);
       this.setState({
         isLoading: false,
         currentProduct: productData
@@ -34,13 +32,7 @@ class App extends React.Component {
     .catch((err) => {
       console.log('testing:', err);
       })
-    }
-
-  toggleLoading(status) {
-    this.setState({
-      isLoading: status
-    })
-  }
+    };
 
 
 
