@@ -6,53 +6,57 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: 1,
-      name: '',
-      details: [],
-      images: [],
-      stars: 0,
+      isLoading: true,
+      currentProduct: {}
     };
 
     this.getProductData = this.getProductData.bind(this);
+    this.toggleLoading = this.toggleLoading.bind(this);
   };
 
   componentDidMount() {
     const urlParams = window.location.pathname.replace(/\//g, ' ');
     const urlParamsArray = urlParams.toString().split(' ');
     const productId = urlParamsArray[2];
-    this.setState({
-      currentProductId: productId
-    });
 
-    this.getProductData(productId);
+    this.getProductData(productId || Math.floor(Math.random() * 100));
   };
 
   getProductData(productId) {
     axios.get(`http://localhost:3000/shop/product/${productId}`)
-    .then((res) => {
-      const productData = res.data[0];
+    .then((productData) => {
+      console.log('www', productData);
       this.setState({
-        name: productData.name,
-        details: productData.details,
-        images: productData.images,
-        stars: productData.stars,
-      })
+        isLoading: false,
+        currentProduct: productData
+      });
     })
     .catch((err) => {
-      console.log('Error from GET: ', err);
+      console.log('testing:', err);
+      })
+    }
+
+  toggleLoading(status) {
+    this.setState({
+      isLoading: status
     })
-  };
+  }
 
 
 
   render() {
     return (
+    this.state.isLoading ?
       <div>
-        <h1>Hello React</h1>
-        <ProductImages images={this.state.images}/>
+        <h1>Loading...</h1>
+      </div>
+      :
+      <div>
+        <ProductImages product={this.state.currentProduct} loading={this.toggleLoading}/>
       </div>
     )
   };
 }
 
 export default App;
+
