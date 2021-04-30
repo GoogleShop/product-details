@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ProductImage = ({image}) => (
+const ProductImage = ({image, id}) => (
   <div>
-    <img src={image} />
+    <img src={image} className={id === 0 ? 'main' : 'mini'} alt=""/>
   </div>
-)
+);
 
 export default ProductImage;

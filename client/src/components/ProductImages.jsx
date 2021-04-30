@@ -1,5 +1,10 @@
 import React from 'react';
 import ProductImage from './ProductImage';
+import styled from 'styled-components';
+
+// const mainImageWrapper = () => {};
+
+// const miniImageWrapper = () => {};
 
 const ProductImages = ({product}) => {
   let images = product.data[0].images;
@@ -8,13 +13,13 @@ const ProductImages = ({product}) => {
     <ul>
       {
         images.map((image, idx) => {
-          return <li className={idx === 0 ? 'main' : 'mini'} key={idx}><ProductImage image={image}/></li>
+          return <li key={idx}><ProductImage image={image} id={idx} /></li>
         })
       }
     </ul>
   </div>
   )
-}
+};
 
 
 export default ProductImages;
