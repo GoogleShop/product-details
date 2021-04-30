@@ -7,7 +7,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLoading: true,
-      currentProduct: {}
+      currentProduct: {},
+      mainImg: ''
     };
 
     this.getProductData = this.getProductData.bind(this);
@@ -44,11 +45,15 @@ class App extends React.Component {
       </div>
       :
       <div>
+        <h1>{this.state.currentProduct.data[0].name}</h1>
+        <h2>{this.state.currentProduct.data[0].stars}</h2>
         <ProductImages product={this.state.currentProduct} loading={this.toggleLoading}/>
+        {console.log(this.state.currentProduct.data[0].name)}
+        <div>Current Product: <img src={this.state.mainImg} /></div>
       </div>
     )
   };
-}
+};
 
 export default App;
 
