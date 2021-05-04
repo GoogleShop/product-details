@@ -27,7 +27,8 @@ class App extends React.Component {
     .then((productData) => {
       this.setState({
         isLoading: false,
-        currentProduct: productData
+        currentProduct: productData,
+        mainImg: productData.data[0].images[0]
       });
     })
     .catch((err) => {
@@ -44,12 +45,19 @@ class App extends React.Component {
         <h1>Loading...</h1>
       </div>
       :
-      <div>
-        <h1>{this.state.currentProduct.data[0].name}</h1>
-        <h2>{this.state.currentProduct.data[0].stars}</h2>
-        <ProductImages product={this.state.currentProduct} loading={this.toggleLoading}/>
-        {console.log(this.state.currentProduct.data[0].name)}
-        <div>Current Product: <img src={this.state.mainImg} /></div>
+      <div id="main">
+        <div>
+          <h1 className='productName'>{this.state.currentProduct.data[0].name}</h1>
+        </div>
+        <div>
+          <h2 className='productStars'>{this.state.currentProduct.data[0].stars}</h2>
+        </div>
+        <div>
+          <ProductImages product={this.state.currentProduct} loading={this.toggleLoading}/>
+        </div>
+        <div className='mainImgBox'>
+          <img src={this.state.mainImg} className="mainImg"/>
+        </div>
       </div>
     )
   };
