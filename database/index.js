@@ -27,7 +27,6 @@ const Product = mongoose.model('Product', productSchema);
 const getProductDataFromDB = async (id) => {
   try {
     const productDataFromDB = await Product.find({productId: id});
-    console.log('ID from db: ', productDataFromDB);
     return productDataFromDB;
   } catch (err) {
     console.log('Error getting product data from DB: ', id);

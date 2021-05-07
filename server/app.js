@@ -11,13 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('client/dist'));
-// app.use('/', express.static(path.join(__dirname, '../client/dist')));
 app.use('/shop/:id', express.static(path.join(__dirname, '../client/dist')));
-
-/*   -_-   */
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
-// });
 
 app.get('/shop/product/:id', async (req, res) => {
   try {
@@ -31,10 +25,6 @@ app.get('/shop/product/:id', async (req, res) => {
   }
   });
 
-
-// app.use('*', (req, res) => {
-//   res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
-// });
 
 app.listen(port, () => console.log(`App listening on port: ${port}!`));
 
