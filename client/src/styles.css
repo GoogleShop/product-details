@@ -57,3 +57,7 @@ body {
    height: 20em;
    width: 20em;
  }
+
+ .clickedImage {
+   border: 3px solid rgb(38, 174, 228);
+ }
