@@ -46,3 +46,14 @@ body {
   height: 20em;
   width: 20em;
 }
+
+.hoverEnterImgBox {
+  position: absolute;
+  top: 70px;
+  left: 200px;
+ }
+
+ .hoverEnterImg {
+   height: 20em;
+   width: 20em;
+ }

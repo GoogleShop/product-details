@@ -14,6 +14,7 @@ class App extends React.Component {
 
     this.getProductData = this.getProductData.bind(this);
     this.onMouseEnterHandler = this.onMouseEnterHandler.bind(this);
+    this.onMouseLeaveHandler = this.onMouseLeaveHandler.bind(this);
   };
 
   componentDidMount() {
@@ -46,11 +47,11 @@ class App extends React.Component {
       console.log(e.target.src);
     };
 
-    // onMouseLeaveHandler(e) {
-    //   this.setState({
-    //     hoverEnterImg: ''
-    //   })
-    // };
+    onMouseLeaveHandler(e) {
+      this.setState({
+        hoverEnterImg: ''
+      })
+    };
 
 
 
@@ -69,7 +70,7 @@ class App extends React.Component {
           <h2 className='productStars'>{this.state.currentProduct.data[0].stars}</h2>
         </div>
         <div>
-          <ProductImages product={this.state.currentProduct} loading={this.toggleLoading} mouseEnter={this.onMouseEnterHandler}/>
+          <ProductImages product={this.state.currentProduct} loading={this.toggleLoading} mouseEnter={this.onMouseEnterHandler} mouseLeave={this.onMouseLeaveHandler}/>
         </div>
         {
         this.state.hoverEnterImg ?
