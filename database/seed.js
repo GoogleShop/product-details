@@ -1,5 +1,5 @@
 let faker = require('faker');
-let Product = require('./index.js');
+let {Product} = require('./index.js');
 
 const getProductName = () => {
   let productName = faker.commerce.product();
@@ -32,6 +32,16 @@ const getProductStars = () => {
   splitStar[1] = splitStar[1].slice(0, 2);
   starRating = splitStar[0] + '.' + splitStar[1];
   return starRating;
+};
+
+const getProductReviewCount = () => {
+  let randomReviewCount = Math.floor(Math.random() * 100000);
+  let splitReviewCount = randomReviewCount.toString().split('');
+  if (splitReviewCount.length > 3) {
+    splitReviewCount.splice(splitReviewCount.length - 3, 0, ',');
+    randomReviewCount = splitReviewCount.join('');
+  }
+  return randomReviewCount;
 };
 
 
@@ -347,6 +357,7 @@ const seedDB = async () => {
         details: getProductDetails(),
         images: getProductImages(),
         stars: getProductStars(),
+        review_count: getProductReviewCount(),
       });
       product.save(function(err, product) {
         if (err) return console.error(err);
@@ -354,7 +365,7 @@ const seedDB = async () => {
       })
     }
   } catch (err) {
-    console.log('Error seeding database!');
+    console.log('Error seeding database!', err);
   }
 };
 

@@ -13,6 +13,7 @@ const productSchema = new mongoose.Schema({
   details: Array,
   images: Array,
   stars: Number,
+  review_count: String,
 });
 
 productSchema.plugin(autoIncrement.plugin, {

@@ -88,8 +88,9 @@ class App extends React.Component {
         <div>
           <h1 className='productName'>{this.state.currentProduct.data[0].name}</h1>
         </div>
-        <div>
+        <div className='productDetails'>
           <h2 className='productStars'>{this.state.currentProduct.data[0].stars}</h2>
+          <h2 className='productReviewCount'>({this.state.currentProduct.data[0].review_count})</h2>
         </div>
         <div>
           <ProductImages product={this.state.currentProduct} loading={this.toggleLoading}
