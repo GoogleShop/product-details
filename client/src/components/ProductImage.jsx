@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ProductImage = ({image, id, mouseEnter, mouseLeave}) => (
+const ProductImage = ({image, id, mouseEnter, mouseLeave, mouseClick}) => (
   <div>
-    <img src={image} className={id === 0 ? 'main' : 'mini'} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} alt=""/>
+    <img src={image} className={id === 0 ? 'main' : 'mini'} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={mouseClick} alt=""/>
   </div>
 );
 

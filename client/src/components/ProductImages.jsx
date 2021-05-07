@@ -6,14 +6,14 @@ import styled from 'styled-components';
 
 // const miniImageWrapper = () => {};
 
-const ProductImages = ({product, mouseEnter, mouseLeave}) => {
+const ProductImages = ({product, mouseEnter, mouseLeave, mouseClick}) => {
   let images = product.data[0].images;
   return (
   <div>
-    <ul>
+    <ul className="miniImages">
       {
         images.map((image, idx) => {
-          return <li key={idx}><ProductImage image={image} id={idx} mouseEnter={mouseEnter} mouseLeave={mouseLeave}/></li>
+          return <li key={idx}><ProductImage image={image} id={idx} mouseEnter={mouseEnter} mouseLeave={mouseLeave} mouseClick={mouseClick}/></li>
         })
       }
     </ul>

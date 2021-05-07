@@ -9,12 +9,14 @@ class App extends React.Component {
       isLoading: true,
       currentProduct: {},
       mainImg: '',
-      hoverEnterImg: ''
+      hoverEnterImg: '',
+      clickedImg: '',
     };
 
     this.getProductData = this.getProductData.bind(this);
     this.onMouseEnterHandler = this.onMouseEnterHandler.bind(this);
     this.onMouseLeaveHandler = this.onMouseLeaveHandler.bind(this);
+    this.onMouseClickHandler = this.onMouseClickHandler.bind(this);
   };
 
   componentDidMount() {
@@ -44,12 +46,32 @@ class App extends React.Component {
       this.setState({
         hoverEnterImg: src
       })
-      console.log(e.target.src);
     };
 
     onMouseLeaveHandler(e) {
+      !this.state.clickedImg ?
+        this.setState({
+          mainImg: this.state.mainImg,
+          hoverEnterImg: ''
+        }) :
+        this.setState({
+          mainImg: this.state.clickedImg
+        })
+    };
+
+    onMouseClickHandler(e) {
+      e.preventDefault();
+      let clickedImg = e.target;
+      let testDiv = document.querySelector('.miniImages').querySelectorAll('li>div>img');
+      for (let li of testDiv) {
+        let clickedClass = li.classList.contains('clickedImage');
+        if ((clickedClass) || (clickedImg.src !== li.src)) {
+          li.classList.remove('clickedImage');
+        }
+      }
+      clickedImg.classList.add('clickedImage');
       this.setState({
-        hoverEnterImg: ''
+        mainImg: clickedImg.src
       })
     };
 
@@ -70,7 +92,8 @@ class App extends React.Component {
           <h2 className='productStars'>{this.state.currentProduct.data[0].stars}</h2>
         </div>
         <div>
-          <ProductImages product={this.state.currentProduct} loading={this.toggleLoading} mouseEnter={this.onMouseEnterHandler} mouseLeave={this.onMouseLeaveHandler}/>
+          <ProductImages product={this.state.currentProduct} loading={this.toggleLoading}
+          mouseEnter={this.onMouseEnterHandler} mouseLeave={this.onMouseLeaveHandler} mouseClick={this.onMouseClickHandler}/>
         </div>
         {
         this.state.hoverEnterImg ?
