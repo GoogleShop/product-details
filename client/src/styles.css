@@ -36,6 +36,13 @@ body {
   margin-left: 45px;
 }
 
+.productReviewCount {
+  font-weight: normal;
+  font-size: 15px;
+  color: rgb(122, 122, 122);
+  margin-left: 5px;
+}
+
 .mainImgBox {
  position: absolute;
  top: 70px;
@@ -61,3 +68,10 @@ body {
  .clickedImage {
    border: 3px solid rgb(38, 174, 228);
  }
+
+ .productDetails {
+   display: flex;
+   flex-direction: row;
+ }
+
+
