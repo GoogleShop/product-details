@@ -8,10 +8,12 @@ class App extends React.Component {
     this.state = {
       isLoading: true,
       currentProduct: {},
-      mainImg: ''
+      mainImg: '',
+      hoverEnterImg: ''
     };
 
     this.getProductData = this.getProductData.bind(this);
+    this.onMouseEnterHandler = this.onMouseEnterHandler.bind(this);
   };
 
   componentDidMount() {
@@ -28,13 +30,27 @@ class App extends React.Component {
       this.setState({
         isLoading: false,
         currentProduct: productData,
-        mainImg: productData.data[0].images[0]
+        mainImg: productData.data[0].images[0],
       });
     })
     .catch((err) => {
       console.log('testing:', err);
       })
     };
+
+    onMouseEnterHandler(e) {
+      const {src} = e.target;
+      this.setState({
+        hoverEnterImg: src
+      })
+      console.log(e.target.src);
+    };
+
+    // onMouseLeaveHandler(e) {
+    //   this.setState({
+    //     hoverEnterImg: ''
+    //   })
+    // };
 
 
 
@@ -53,11 +69,17 @@ class App extends React.Component {
           <h2 className='productStars'>{this.state.currentProduct.data[0].stars}</h2>
         </div>
         <div>
-          <ProductImages product={this.state.currentProduct} loading={this.toggleLoading}/>
+          <ProductImages product={this.state.currentProduct} loading={this.toggleLoading} mouseEnter={this.onMouseEnterHandler}/>
         </div>
+        {
+        this.state.hoverEnterImg ?
+        <div className='hoverEnterImgBox'>
+          <img src={this.state.hoverEnterImg} className="hoverEnterImg"/>
+        </div> :
         <div className='mainImgBox'>
           <img src={this.state.mainImg} className="mainImg"/>
         </div>
+          }
       </div>
     )
   };
