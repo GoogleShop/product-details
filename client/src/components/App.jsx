@@ -8,12 +8,14 @@ class App extends React.Component {
     this.state = {
       isLoading: true,
       currentProduct: {},
+      stars: [],
       mainImg: '',
       hoverEnterImg: '',
       clickedImg: '',
     };
 
     this.getProductData = this.getProductData.bind(this);
+    this.createStars = this.createStars.bind(this);
     this.onMouseEnterHandler = this.onMouseEnterHandler.bind(this);
     this.onMouseLeaveHandler = this.onMouseLeaveHandler.bind(this);
     this.onMouseClickHandler = this.onMouseClickHandler.bind(this);
@@ -35,13 +37,25 @@ class App extends React.Component {
         currentProduct: productData,
         mainImg: productData.data[0].images[0],
       });
+      this.createStars(productData.data[0].stars);
     })
     .catch((err) => {
       console.log('testing:', err);
       })
     };
 
+    createStars(starCount) {
+      let stars = [];
+      for (let i = 0; i < starCount; i++) {
+        stars.push('★');
+      }
+      this.setState({
+        stars
+      })
+    };
+
     onMouseEnterHandler(e) {
+      e.preventDefault();
       const {src} = e.target;
       this.setState({
         hoverEnterImg: src
@@ -49,21 +63,23 @@ class App extends React.Component {
     };
 
     onMouseLeaveHandler(e) {
-      !this.state.clickedImg ?
+      e.preventDefault();
+      let clickedImg = this.state.clickedImg;
+      !clickedImg ?
         this.setState({
           mainImg: this.state.mainImg,
           hoverEnterImg: ''
         }) :
         this.setState({
-          mainImg: this.state.clickedImg
+          mainImg: clickedImg
         })
     };
 
     onMouseClickHandler(e) {
       e.preventDefault();
       let clickedImg = e.target;
-      let testDiv = document.querySelector('.miniImages').querySelectorAll('li>div>img');
-      for (let li of testDiv) {
+      let imgList = document.querySelector('.miniImages').querySelectorAll('li>div>img');
+      for (let li of imgList) {
         let clickedClass = li.classList.contains('clickedImage');
         if ((clickedClass) || (clickedImg.src !== li.src)) {
           li.classList.remove('clickedImage');
@@ -89,11 +105,11 @@ class App extends React.Component {
           <h1 className='productName'>{this.state.currentProduct.data[0].name}</h1>
         </div>
         <div className='productDetails'>
-          <h2 className='productStars'>{this.state.currentProduct.data[0].stars}</h2>
+          <h2 className='productStars'>{this.state.stars}</h2>
           <h2 className='productReviewCount'>({this.state.currentProduct.data[0].review_count})</h2>
         </div>
         <div>
-          <ProductImages product={this.state.currentProduct} loading={this.toggleLoading}
+          <ProductImages images={this.state.currentProduct.data[0].images} loading={this.toggleLoading}
           mouseEnter={this.onMouseEnterHandler} mouseLeave={this.onMouseLeaveHandler} mouseClick={this.onMouseClickHandler}/>
         </div>
         {

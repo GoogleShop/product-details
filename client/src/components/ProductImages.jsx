@@ -6,8 +6,8 @@ import styled from 'styled-components';
 
 // const miniImageWrapper = () => {};
 
-const ProductImages = ({product, mouseEnter, mouseLeave, mouseClick}) => {
-  let images = product.data[0].images;
+const ProductImages = ({images, mouseEnter, mouseLeave, mouseClick}) => {
+  // let images = product.data[0].images;
   return (
   <div>
     <ul className="miniImages">

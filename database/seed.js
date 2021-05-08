@@ -18,8 +18,9 @@ const getProductDetails = () => {
 
 const getProductImages = () => {
   let images = [];
+  let randomImgsLength = Math.round(Math.random() * 4 + 1);
 
-  while (images.length <= 5) {
+  while (images.length <= randomImgsLength) {
     let randomImage = productImages[Math.floor(Math.random() * productImages.length)];
     images.push(randomImage);
   }
@@ -27,10 +28,7 @@ const getProductImages = () => {
 };
 
 const getProductStars = () => {
-  let starRating = (Math.random() * (5 - 1) + 1);
-  let splitStar = starRating.toString().split('.');
-  splitStar[1] = splitStar[1].slice(0, 2);
-  starRating = splitStar[0] + '.' + splitStar[1];
+  let starRating = Math.round(Math.random() * (5 - 1) + 1);
   return starRating;
 };
 
