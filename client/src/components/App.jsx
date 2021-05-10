@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductImages from './ProductImages';
+import ProductDetails from './ProductDetails';
 const axios = require('axios');
 
 class App extends React.Component {
@@ -104,7 +105,7 @@ class App extends React.Component {
         <div>
           <h1 className='productName'>{this.state.currentProduct.data[0].name}</h1>
         </div>
-        <div className='productDetails'>
+        <div className='productInfo'>
           <h2 className='productStars'>{this.state.stars}</h2>
           <h2 className='productReviewCount'>({this.state.currentProduct.data[0].review_count})</h2>
         </div>
@@ -121,6 +122,9 @@ class App extends React.Component {
           <img src={this.state.mainImg} className="mainImg"/>
         </div>
           }
+        <div className='productDetails'>
+          <ProductDetails details={this.state.currentProduct.data[0].details}/>
+        </div>
       </div>
     )
   };
