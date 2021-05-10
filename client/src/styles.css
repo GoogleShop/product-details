@@ -69,9 +69,21 @@ body {
    border: 3px solid rgb(38, 174, 228);
  }
 
- .productDetails {
+ .productInfo {
    display: flex;
    flex-direction: row;
  }
 
+ .productDetails {
+   position: absolute;
+   left: 550px;
+   top: 70px;
+ }
+
+ .productDetail {
+   margin: 10px 10px;
+   padding: 10px 10px;
+   width: 200%;
+   list-style-type: disc;
+ }
 
