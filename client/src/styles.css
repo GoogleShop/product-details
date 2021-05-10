@@ -85,5 +85,8 @@ body {
    padding: 10px 10px;
    width: 200%;
    list-style-type: disc;
+   font-size: 15px;
+   font-weight: lighter;
+   color: rgb(78, 77, 77);
  }
 
