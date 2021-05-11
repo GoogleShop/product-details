@@ -123,7 +123,6 @@ class App extends React.Component {
         </div>
           }
         <div className='productDetails'>
-          {/* {console.log(this.state.currentProduct.data[0].details)} */}
           <ProductDetails details={this.state.currentProduct.data[0].details}/>
         </div>
       </div>
