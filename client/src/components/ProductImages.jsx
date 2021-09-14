@@ -1,7 +1,5 @@
 import React from 'react';
 import ProductImage from './ProductImage';
-import styled from 'styled-components';
-
 
 const ProductImages = ({images, mouseEnter, mouseLeave, mouseClick}) => {
   return (
