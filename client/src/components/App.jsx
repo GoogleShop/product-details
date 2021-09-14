@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductImages from './ProductImages';
 import ProductDetails from './ProductDetails';
 const axios = require('axios');
+
 
 class App extends React.Component {
   constructor(props) {
@@ -131,4 +132,3 @@ class App extends React.Component {
 };
 
 export default App;
-

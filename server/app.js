@@ -16,9 +16,7 @@ app.use('/shop/:id', express.static(path.join(__dirname, '../client/dist')));
 app.get('/shop/product/:id', async (req, res) => {
   try {
     let productId = req.params.id;
-    console.log(productId);
     let productData = await controller.getProductData(productId);
-    console.log(productData);
     res.send(productData);
   } catch (err) {
     console.log('Error from GET: ', err);
