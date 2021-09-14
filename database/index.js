@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
   images: Array,
   stars: Number,
   review_count: String,
-}); 
+});
 
 productSchema.plugin(autoIncrement.plugin, {
   model: 'Product',
@@ -35,7 +35,3 @@ const getProductDataFromDB = async (id) => {
 };
 
 module.exports = {Product, getProductDataFromDB};
-
-
-
-
