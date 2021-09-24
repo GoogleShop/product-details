@@ -7,7 +7,7 @@
     "start": "nodemon ./server/app.js",
     "build": "webpack --watch",
     "seedDB": "node database/seed.js",
-    "test": "mocha"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
     "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.4",
+    "jest": "^27.2.1",
     "mocha": "^9.1.1",
     "nodemon": "^2.0.7",
     "path": "^0.12.7",
